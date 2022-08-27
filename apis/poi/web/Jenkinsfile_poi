@@ -9,7 +9,7 @@ parameters {
     environment {
       ImgName = "sunjenny/poi"
       ImgTag = "2.0"
-      WorkDir = "apis/poi"
+      WorkDir = "apis/poi/web"
     }
 
     stages {
