@@ -19,14 +19,7 @@ pipeline {
 		}
             }
         }
-	stage('Canary') {
-	   steps {
-	    timeout(time: 10, unit: 'SECONDS') {
- 	   	// some block
-		input message: 'Can we upload image?', ok: 'Upload'
-	    }	
-	   }
-	}
+	
 	stage('Upload Docker Image') {
    when {
   		expression {return params.blUploadImg}
