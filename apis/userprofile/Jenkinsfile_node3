@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+        label 'node3'
+    }
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building docker image'
+                dir('apis/userprofile/') {
+                	sh 'pwd'
+                	sh 'sudo docker build -t sunjenny/userprofile:2.0 .'
+		}
+            }
+        }
+        stage('Upload Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'sunjenny_dockerhub', passwordVariable: 'dockerPwd', usernameVariable: 'dockerUsr')]) {
+                    // some block
+                    echo 'Dockerhub Login'
+                    sh 'sudo docker login -u $dockerUsr -p $dockerPwd'
+                    sh 'sudo docker push sunjenny/userprofile:2.0'
+                }
+            }
+        }
+    }
+}
