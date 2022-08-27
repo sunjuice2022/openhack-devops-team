@@ -2,7 +2,10 @@ pipeline {
     agent {
         label 'main'
     }
-
+parameters {
+  	booleanParam defaultValue: true, description: 'True:  upload image (default); False: will not upload ', name: 'blUploadImg'
+  	string defaultValue: '1.0', name: 'ImgTag', trim: true
+    }
     environment {
       ImgName = "sunjenny/trips"
       ImgTag = "2.0"
